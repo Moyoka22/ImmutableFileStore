@@ -1,0 +1,14 @@
+{
+  "name": "immutable-filestore-js",
+  "version": "0.0.1",
+  "description": "Stores JavaScript objects on the file system immutably in JSON.",
+  "main": "src/index.js",
+  "repository": "https://github.com/Moyoka22/ImmutableFileStoreJS.git",
+  "author": "Moye Odiase",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {},
+  "dependencies": {
+    "eslint": "^7.22.0"
+  }
+}
