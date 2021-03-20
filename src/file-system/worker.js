@@ -1,35 +1,37 @@
-const fs = require("./fs");
+const fs = require("fs");
 
 const Operation = require("./operation");
+const transformer = require("./transformer");
 
-module.exports = class Worker {
-  constructor(path) {
+module.exports.Worker = class Worker {
+  constructor({ path }) {
     this._path = path;
-    this._opQueue = [];
-    setInterval(this._flush, 200);
+    if (!fs.existsSync(path)) {
+      fs.writeSync(path, "");
+    }
   }
   async execute(operation) {
     switch (operation.type) {
       case Operation.types.ADD:
-        await this._handleAddOperation(operation);
+      case Operation.types.UPDATE:
+      case Operation.types.DELETE:
+        await this._handlePutOperation(operation);
         break;
       case Operation.types.GET:
         result = await this._handleGetOperation(operation);
-        break;
-      case Operation.types.UPDATE:
-        await this._handleUpdateOperation(operation);
-        break;
-      case Operation.types.DELETE:
-        await this._handleDeleteOperation(operation);
-        break;
     }
     return result;
   }
-  async _flush() {}
-  async _handleAddOperation(operation) {
-    this._opQueue.push();
+  async _handlePutOperation(operation) {
+    const fileContent = await fs.promises.readFile(path);
+    const newOperations = transformer.createNewOperations(
+      operation,
+      fileContent
+    );
+    await fs.write.promises(this._path, newOperations);
   }
-  async _handleGetOperation() {}
-  async _handleUpdateOperation() {}
-  async _handleDeleteOperation() {}
+  async _handleGetOperation() {
+    const fileContent = await fs.promises.readFile(path);
+    return transformer.getObject(fileContent, operation);
+  }
 };

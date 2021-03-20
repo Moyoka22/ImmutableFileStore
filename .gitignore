@@ -1,5 +1,6 @@
 # Developer Environment
 .vscode/
+scratch/
 
 # Node Modules
 node_modules/
