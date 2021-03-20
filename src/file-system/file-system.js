@@ -11,7 +11,7 @@ class FileSystem {
       throw new Error("Invalid object dispatched. Not an operation.");
     const data_file_path = FileSystem.DATA_DIR.join(`${operation.type}.json`);
     const worker = new Worker(data_file_path);
-    return await this._worker.execute(operation);
+    return await worker.execute(operation);
   }
 }
 const fileSystem = FileSystem();
