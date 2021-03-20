@@ -13,7 +13,7 @@ class FileSystem {
   async execute(operation) {
     if (!operation instanceof Operation)
       throw new Error("Invalid object dispatched. Not an operation.");
-    const data_file_path = FileSystem.DATA_DIR.join(`${operation.type}.json`);
+    const data_file_path = this._dirPath.join(`${operation.modelName}.json`);
     const worker = new Worker(data_file_path);
     return await worker.execute(operation);
   }
