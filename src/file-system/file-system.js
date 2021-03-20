@@ -4,7 +4,11 @@ const Operation = require("./operation");
 
 class FileSystem {
   static DATA_DIR = path.join("..", "..", "data");
-  constructor() {}
+  constructor(dirPath) {
+    this._dirPath = dirPath;
+    if (Object.is(undefined, this._dirPath))
+      this._dirPath = FileSystem.DATA_DIR;
+  }
 
   async execute(operation) {
     if (!operation instanceof Operation)
