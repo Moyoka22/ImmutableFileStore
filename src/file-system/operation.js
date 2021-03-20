@@ -5,7 +5,7 @@ module.export.Operation = class Operation {
 
   constructor(type, modelName, item_id, data) {
     if (Object.is(Operation.types[type], undefined))
-      throw new Error(`Invalid operation ${type}.`);
+      throw new Error(`Invalid operation type: ${type}.`);
 
     this.type = type;
     this.modelName = modelName;
