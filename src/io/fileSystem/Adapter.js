@@ -1,8 +1,10 @@
 const path = require("path");
 
-const Operation = require("./operation");
+const Worker = require("./Manager");
+const Operation = require("../Operation");
+const { ModelIO } = require("../../model");
 
-class FileSystem {
+class Adapter extends ModelIO {
   static DATA_DIR = path.join("..", "..", "data");
   constructor(dirPath) {
     this._dirPath = dirPath;
@@ -18,6 +20,5 @@ class FileSystem {
     return await worker.execute(operation);
   }
 }
-const fileSystem = FileSystem();
 
-module.exports.fileSystem = fileSystem;
+module.exports = Controller;

@@ -1,9 +1,9 @@
 const fs = require("fs");
 
-const Operation = require("./operation");
 const transformer = require("./transformer");
+const { Operation } = require("../Operation");
 
-module.exports.Worker = class Worker {
+module.exports = class Worker {
   constructor({ path }) {
     this._path = path;
     if (!fs.existsSync(path)) {

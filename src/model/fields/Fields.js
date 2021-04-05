@@ -1,10 +1,10 @@
-const { Field } = require("./field");
+const Field = require("./Field");
 
-class Fields {
+module.exports = class Fields {
   constructor(fields) {
     this._fieldMap = {};
     for (let field of fields) {
-      if (!field instanceof Field) {
+      if (!(field instanceof Field)) {
         throw new Error("Invalid field supplied to model initializer.");
       }
       const fieldName = field.name;
@@ -18,8 +18,4 @@ class Fields {
     if (Object.is(field, undefined))
       throw new Error(`Field ${fieldName} not in fields.`);
   }
-}
-
-exports.Fields = (fields) => {
-  return new Fields(fields);
 };
